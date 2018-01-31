@@ -7,30 +7,40 @@ package com.example.sony.user_profile;
 public class Details {
 
     private String username;
-    private Integer id;
-    private Integer mobilenumber;
+    private int id;
+    private int mobilenumber;
     private String email;
 
-    public Details(){}
-    public Details(String username, Integer id, Integer mobilenumber, String email) {
+    public Details(){
 
     }
 
-    public String getusername() {
-        return getusername();
+    public void setusername(String username) {
+        this.username = username;
+    }
+    public void setId (int id) {
+        this.id = id;
+    }
+    public void setMobilenumber(int mobilenumber) {
+        this.mobilenumber = mobilenumber;
+    }
+    public void setEmail (String email) {
+        this.email = email;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public int getId() {
+        return id;
+    }
+    public int getMobilenumber() {
+        return mobilenumber;
+    }
+    public String getemail() {
+        return email;
     }
 
-    public Integer getSid() {
-        return getSid();
-    }
 
-    public Integer getMobilenumber() {
-        return getMobilenumber();
-    }
-
-    public boolean getemail() {
-        return getemail();
-    }
 
 
 }
