@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void login(View v){
 
-        mAuth.signInWithEmailAndPassword(et1.getText().toString(), et4.getText().toString())
+        mAuth.signInWithEmailAndPassword(et1.getText().toString().trim(), et4.getText().toString().trim())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
     }
     public void register(View v){
 
-        mAuth.createUserWithEmailAndPassword(et1.getText().toString(),
-                et4.getText().toString())
+        mAuth.createUserWithEmailAndPassword(et1.getText().toString().trim(),
+                et4.getText().toString().trim())
 
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
-
     @Override
     public void onStart() {
         super.onStart();
