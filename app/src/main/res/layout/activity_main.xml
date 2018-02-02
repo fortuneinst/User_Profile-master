@@ -11,7 +11,7 @@
     tools:context="com.example.sony.user_profile.MainActivity">
 
     <EditText
-        android:id="@+id/etuname"
+        android:id="@+id/etusername"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:hint="UserName"
@@ -25,10 +25,10 @@
         android:hint="Id"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_below="@+id/etuname"
+        android:layout_below="@+id/etusername"
         />
     <EditText
-        android:id="@+id/etmnumber"
+        android:id="@+id/etmobilenumber"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:hint="MobileNumber"
@@ -43,7 +43,7 @@
         android:hint="Email"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_below="@+id/etmnumber"
+        android:layout_below="@+id/etmobilenumber"
         />
 
     <Button
