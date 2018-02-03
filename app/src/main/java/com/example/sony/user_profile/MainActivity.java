@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                            Toast.makeText(MainActivity.this, "login Successfully.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                         if (!task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                            Toast.makeText(MainActivity.this, "Authentication Success.",
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -108,9 +108,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void dodata(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("myudata");
-        DatabaseReference myRef1 = database.getReference("myedata");
-        DatabaseReference myRef2 = database.getReference("mypdata");
+        DatabaseReference myRef = database.getReference("myuserdata");
+        DatabaseReference myRef1 = database.getReference("myemaildata");
+        DatabaseReference myRef2 = database.getReference("myphonenumberdata");
         DatabaseReference myRef3 = database.getReference("myiddata");
 
 
