@@ -22,9 +22,12 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
+
     private static final String TAG = "MY_TAG";
+    private String mCustomToken;
     EditText et1, et2, et3, et4;
     Button bt1, bt2;
 
@@ -77,7 +80,28 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+       /* mAuth.signInWithCustomToken(mCustomToken)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCustomToken:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCustomToken:failure", task.getException());
+                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                });*/
     }
+
+
+
+
 
     public void register(View v) {
 
@@ -114,10 +138,11 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference myRef3 = database.getReference("myiddata");
 
 
-        String email = et4.getText().toString().trim();
+
         String uname =et1.getText().toString().trim();
-        String pname =et3.getText().toString().trim();
         String iname =et2.getText().toString().trim();
+        String pname =et3.getText().toString().trim();
+        String email = et4.getText().toString().trim();
 
         myRef.setValue(uname);
         myRef1.setValue(email);
@@ -127,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
   /*  public void docache(){
-
 
         AsyncMemcacheService asyncCache = MemcacheServiceFactory.getAsyncMemcacheService();
 asyncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
@@ -142,7 +166,12 @@ byte[] value;
 String uname, emdata, phdata, iddata;
 
 uname = et1.getText().toString();
-emdata = et2.getText().toString();
+idata = et2.getText().toString();
+phdata = et3.getText().toString();
+emdata = et4.getText().toString();
+
+
+
 
 
 long count = 1;
