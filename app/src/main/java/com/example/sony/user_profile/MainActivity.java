@@ -17,6 +17,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.IgnoreExtraProperties;
+
+import static android.R.attr.name;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +31,11 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    private DatabaseReference mDatabaseReference;
+    //private DatabaseReference mDatabaseReference;
+
+    private DatabaseReference mDatabase;
+// ...
+    // mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
     @Override
@@ -68,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (!task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "login Successfully.",
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -78,14 +85,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
     public void register(View v) {
 
         String email = et4.getText().toString().trim();
-        String uname =et1.getText().toString().trim();
-
+        String uname = et1.getText().toString().trim();
 
 
         mAuth.createUserWithEmailAndPassword(email, uname)
@@ -95,21 +98,20 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
 
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "Authentication Success.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+
 
                     }
                 });
 
-        dodata();
+        //dodata();
 
     }
 
 
-    public void dodata(){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+    public void dodata() {
+       // Details details = new Details();
+        /*FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("myuserdata");
         DatabaseReference myRef1 = database.getReference("myemaildata");
         DatabaseReference myRef2 = database.getReference("myphonenumberdata");
@@ -125,7 +127,38 @@ public class MainActivity extends AppCompatActivity {
         myRef.setValue(uname);
         myRef1.setValue(email);
         myRef2.setValue(pname);
-        myRef3.setValue(iname);
+        myRef3.setValue(iname);*/
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+
+        @IgnoreExtraProperties
+        class Details {
+
+            private String username;
+            private String email;
+            private String mobilenumber;
+            private String id;
+
+            public Details() {
+                // Default constructor required for calls to DataSnapshot.getValue(User.class)
+            }
+
+            public Details(String username, String email, String mobilenumer, String id) {
+                this.username = username;
+                this.email = email;
+                this.mobilenumber = mobilenumber;
+                this.id = id;
+            }
+
+        }
+    }
+        private void writeNewUser(String id, String username, String email,String mobilenumber) {
+            Details user = new Details(username, email, mobilenumber);
+
+            mDatabase.child("user").child(id).setValue(user);
+            mDatabase.child("user").child(id).child("username").setValue(name);
+        }
 
     }
 
@@ -180,4 +213,5 @@ try {
 */
 
 
-}
+
+
