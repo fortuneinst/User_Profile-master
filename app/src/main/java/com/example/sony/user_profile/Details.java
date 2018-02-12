@@ -11,6 +11,36 @@ public class Details {
     private String phoneNumber;
     private String emailId;
 
+    public Details(){
+
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public Details(String userName, String id, String phoneNumber, String emailId) {
+        this.userName = userName;
+
+        this.id = id;
+        this.phoneNumber = phoneNumber;
+        this.emailId = emailId;
+    }
+    /*public Details(String username, String email, String mobilenumber) {
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -43,6 +73,6 @@ public class Details {
         this.emailId = emailId;
     }
 
-
+*/
 }
 
