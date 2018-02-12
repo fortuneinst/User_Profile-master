@@ -11,7 +11,7 @@ public class Details {
     private String phoneNumber;
     private String emailId;
 
-    public Details(){
+    public Details() {
 
     }
 
@@ -38,41 +38,6 @@ public class Details {
         this.phoneNumber = phoneNumber;
         this.emailId = emailId;
     }
-    /*public Details(String username, String email, String mobilenumber) {
-    }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String  getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String  getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmailId() {
-        return emailId;
-    }
-
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
-
-*/
 }
 
