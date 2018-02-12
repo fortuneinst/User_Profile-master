@@ -18,11 +18,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.IgnoreExtraProperties;
 
-import static android.R.attr.name;
+
 
 public class MainActivity extends AppCompatActivity {
+
 
 
     private static final String TAG = "MY_TAG";
@@ -58,12 +58,11 @@ public class MainActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    // User is signed in
                     Toast.makeText(getApplicationContext(), "Loggedin As :" + user.getEmail(),
                             Toast.LENGTH_LONG).show();
 
                 } else {
-                    // User is signed out
+
                     Toast.makeText(getApplicationContext(), "User is Not Loggedin",
                             Toast.LENGTH_LONG).show();
 
@@ -113,12 +112,12 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "you should enter a name", Toast.LENGTH_LONG).show();
         }
-
-
     }
-
-
 }
+
+
+
+
 
 
 
