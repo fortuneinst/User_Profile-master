@@ -4,6 +4,7 @@ package com.example.sony.user_profile;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,19 +24,16 @@ import static android.R.attr.name;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private static final String TAG = "MY_TAG";
-    private String mCustomToken;
     EditText et1, et2, et3, et4;
-    Button bt1, bt2;
+    Button bt1, bt2, bt3;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    //private DatabaseReference mDatabaseReference;
 
-    private DatabaseReference mDatabase;
-// ...
-    // mDatabase = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference databasedetails;
 
 
     @Override
@@ -43,10 +41,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        databasedetails = FirebaseDatabase.getInstance().getReference("detail");
+
         et1 = (EditText) findViewById(R.id.etusername);
         et2 = (EditText) findViewById(R.id.etid);
         et3 = (EditText) findViewById(R.id.etmobilenumber);
         et4 = (EditText) findViewById(R.id.etemail);
+
+        bt1 = (Button) findViewById(R.id.btlog);
+        bt2 = (Button) findViewById(R.id.btreg);
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -87,131 +90,35 @@ public class MainActivity extends AppCompatActivity {
 
     public void register(View v) {
 
-        String email = et4.getText().toString().trim();
-        String uname = et1.getText().toString().trim();
-
-
-        mAuth.createUserWithEmailAndPassword(email, uname)
+        mAuth.createUserWithEmailAndPassword(et4.getText().toString().trim(), et1.getText().toString().trim())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
-
-
-
                     }
                 });
 
-        //dodata();
-
-    }
-
-
-
-    public void dodata() {
-       // Details details = new Details();
-        /*FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("myuserdata");
-        DatabaseReference myRef1 = database.getReference("myemaildata");
-        DatabaseReference myRef2 = database.getReference("myphonenumberdata");
-        DatabaseReference myRef3 = database.getReference("myiddata");
-
-
-
-        String uname =et1.getText().toString().trim();
-        String iname =et2.getText().toString().trim();
-        String pname =et3.getText().toString().trim();
+        String uname = et1.getText().toString().trim();
+        String id = et2.getText().toString().trim();
+        String mobile = et3.getText().toString().trim();
         String email = et4.getText().toString().trim();
 
-        myRef.setValue(uname);
-        myRef1.setValue(email);
-        myRef2.setValue(pname);
-        myRef3.setValue(iname);*/
+        if (!TextUtils.isEmpty(uname)) {
+            String id1 = databasedetails.push().getKey();
+            Details details = new Details(uname, id, mobile, email);
+            databasedetails.child(id1).setValue(details);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-
-        @IgnoreExtraProperties
-        class Details {
-
-            private String username;
-            private String email;
-            private String mobilenumber;
-            private String id;
-
-            public Details() {
-                // Default constructor required for calls to DataSnapshot.getValue(User.class)
-            }
-
-            public Details(String username, String email, String mobilenumer, String id) {
-                this.username = username;
-                this.email = email;
-                this.mobilenumber = mobilenumber;
-                this.id = id;
-            }
-
+            Toast.makeText(this, "Data Successfully  added", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "you should enter a name", Toast.LENGTH_LONG).show();
         }
-    }
-        private void writeNewUser(String id, String username, String email,String mobilenumber) {
-            Details user = new Details(username, email, mobilenumber);
 
-            mDatabase.child("user").child(id).setValue(user);
-            mDatabase.child("user").child(id).child("username").setValue(name);
-        }
 
     }
 
-  /*  public void docache(){
-
-        AsyncMemcacheService asyncCache = MemcacheServiceFactory.getAsyncMemcacheService();
-asyncCache.setErrorHandler(ErrorHandlers.getConsistentLogAndContinue(Level.INFO));
-
-String unkey = "unkey";
-String emkey = "emailkey";
-String phkey = "phnumkey";
-String idkey = "idkey";
-
-byte[] value;
-
-String uname, emdata, phdata, iddata;
-
-uname = et1.getText().toString();
-idata = et2.getText().toString();
-phdata = et3.getText().toString();
-emdata = et4.getText().toString();
-
-
-
-
-
-long count = 1;
-Future<Object> futureValue = asyncCache.get(key); // Read from cache.
-// ... Do other work in parallel to cache retrieval.
-try {
-	    asyncCache.put(unkey , uname);
-	    asyncCache.put(emkey, emdata);
-	    asyncCache.put(phkey , phdata);
-	    asyncCache.put(idkey, iddata);
-
-  }
-} catch (InterruptedException | ExecutionException e) {
-  throw new ServletException("Error when waiting for future value", e);
-}
-
-
-
-/*
-
-    asyncCache.get(unkey);
-    asyncCache.get(emkey);
-    asyncCache.get(phkey);
-    asyncCache.get(idkey);
-
 
 }
-*/
-
 
 
 
